@@ -1,4 +1,4 @@
-use did_data_1.dta,clear
+use did_data_1.dta, clear
 set more off
 
 // Difference-in-difference variable
@@ -12,8 +12,8 @@ reghdfe y treated_id post_treatment did, a(id time) cl(id)
 
 // Trend variables
 // Used for detrending when we have an issue with parallel trends assumption
-gen treated_id_trend_1 = treated_id* time
-gen treated_id_trend_2 = (1-treated_id)* time
+gen treated_id_trend_1 = treated_id*time
+gen treated_id_trend_2 = (1-treated_id)*time
 
 // Detrended Simple DID (with cluster on individual)
 reg y treated_id post_treatment did treated_id_trend_1 treated_id_trend_2, cl(id)
